@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 		c = 2 * b - pow(a, 2);
 		d = pow(b, 2);
 		
-		y[i] = (-c - sqrt(pow(c,2) - 4 * d))/2;
+		y[i] = (-c + sqrt(pow(c,2) - 4 * d))/2;
 		
 		printf("(%Lf, %Lf), ", i * h, y[i]);
 	}
