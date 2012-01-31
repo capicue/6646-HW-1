@@ -1,3 +1,20 @@
+/*****************************************************************************
+
+L 2.4.2 Use the method of exercise 2.4.2 to compute numerical solutions of 
+the scalar initial value problem $y' = 4 x y^{1/2}$, $y(0) = 1$ for 
+$0 \leq x \leq 2$, using the steplengths $h = 0.1, 0.05,$ and $0.025$.
+Compare the results with the exact solution $y(x) = (1 + x^2)^2$ and deduce
+that the numerical solutions are not converging to the exact solution as
+$h \to 0$.
+
+The method used is
+\[
+y_{n + 2} - y_{n + 1} = \frac{h}{12}\left[4 f(x_{n + 2}, y_{n + 2}) + 
+8 f(x_{n + 1}, y_{n + 1}) - f(x_n, y_n)\right].
+\]
+
+*****************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -19,8 +36,9 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 	
+	// plot the actual solution for comparison
 	printf("p = plot((x^2 + 1)^2, (0,2))\n");
-	printf("p += point((");
+	printf("p += scatter_plot([");
 	
 	y[0] = y[1] = 1;
 	printf("(%Lf, %Lf), ", 0 * h, y[0]);
@@ -37,10 +55,11 @@ int main(int argc, char** argv) {
 		
 		y[i] = (-c + sqrt(pow(c,2) - 4 * d))/2;
 		
-		printf("(%Lf, %Lf), ", i * h, y[i]);
+		printf("[%Lf, %Lf], ", i * h, y[i]);
 	}
 	
-	printf("), color='red', pointsize=1)\n");
+	printf("], marker=\"o\", markersize=\"20\")\n");
+	printf("p.show\n");
 	
 	free(y);
 	y = NULL;
