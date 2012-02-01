@@ -33,29 +33,22 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 	
-	// plot the actual solution for comparison
-	printf("p = plot((x^2 + 1)^2, (0,2))\n");
-	
-	// plot the numerical solution
-	printf("p += scatter_plot([");
-	
-	// set and plot the initial conditions
+	// set the initial conditions
 	y[0] = y[1] = 1;
-	printf("[%Lf, %Lf], ", 0 * h, y[0]);
-	printf("[%Lf, %Lf], ", 1 * h, y[1]);
 	
-	for(int i = 2; i <= steps; i++) {
+	// compute the numerical solution
+	for(int i = 2; i < steps; i++) {
 		y[i] = (1 + alpha) * y[i-1]
 		       - alpha * y[i-2]
 		       + 2 * (3 - alpha) * (i - 1) * pow(h, 2) * sqrt(y[i-1])
 		       - 2 * (1 + alpha) * (i - 2) * pow(h, 2) * sqrt(y[i-2]);
-		if(!isnan(y[i])) {
-			printf("[%Lf, %Lf], ", i * h, y[i]);
-		}
 	}
 	
-	printf("], marker=\"o\", markersize=20)\n");
-	printf("p.show\n");
+	for(int i = 0; i < steps; i++) {
+		if(!isnan(y[i])) {
+			printf("[%Lf, %Lf]\n", i * h, y[i]);
+		}
+	}
 	
 	free(y);
 	y = NULL;
