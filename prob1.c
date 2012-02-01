@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 	long long    steps = 0;
 	
 	h     = parse_args(argc, argv);
-	steps = round(2.0 / h);
+	steps = round(2.0 / h) + 1.0;
 	y     = malloc(steps * sizeof(*y));
 	
 	if (y == NULL) {
@@ -38,11 +38,14 @@ int main(int argc, char** argv) {
 	
 	// plot the actual solution for comparison
 	printf("p = plot((x^2 + 1)^2, (0,2))\n");
+	
+	// plot the numerical solution
 	printf("p += scatter_plot([");
 	
+	// set and plot the initial conditions
 	y[0] = y[1] = 1;
-	printf("(%Lf, %Lf), ", 0 * h, y[0]);
-	printf("(%Lf, %Lf), ", 1 * h, y[1]);
+	printf("[%Lf, %Lf], ", 0 * h, y[0]);
+	printf("[%Lf, %Lf], ", 1 * h, y[1]);
 	
 	for(int i = 2; i <= steps; i++) {
 		long double a, b, c, d;
@@ -58,7 +61,7 @@ int main(int argc, char** argv) {
 		printf("[%Lf, %Lf], ", i * h, y[i]);
 	}
 	
-	printf("], marker=\"o\", markersize=\"20\")\n");
+	printf("], marker=\"o\", markersize=20)\n");
 	printf("p.show\n");
 	
 	free(y);

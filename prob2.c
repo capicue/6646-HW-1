@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 	long long    steps = 0;
 	
 	parse_args(argc, argv, &alpha, &h);
-	steps = round(2.0 / h);
+	steps = round(2.0 / h) + 1;
 	y     = malloc(steps * sizeof(*y));
 	
 	if (y == NULL) {
@@ -35,22 +35,26 @@ int main(int argc, char** argv) {
 	
 	// plot the actual solution for comparison
 	printf("p = plot((x^2 + 1)^2, (0,2))\n");
+	
+	// plot the numerical solution
 	printf("p += scatter_plot([");
 	
+	// set and plot the initial conditions
 	y[0] = y[1] = 1;
-	printf("(%Lf, %Lf), ", 0 * h, y[0]);
-	printf("(%Lf, %Lf), ", 1 * h, y[1]);
+	printf("[%Lf, %Lf], ", 0 * h, y[0]);
+	printf("[%Lf, %Lf], ", 1 * h, y[1]);
 	
 	for(int i = 2; i <= steps; i++) {
 		y[i] = (1 + alpha) * y[i-1]
 		       - alpha * y[i-2]
 		       + 2 * (3 - alpha) * (i - 1) * pow(h, 2) * sqrt(y[i-1])
 		       - 2 * (1 + alpha) * (i - 2) * pow(h, 2) * sqrt(y[i-2]);
-		
-		printf("[%Lf, %Lf], ", i * h, y[i]);
+		if(!isnan(y[i])) {
+			printf("[%Lf, %Lf], ", i * h, y[i]);
+		}
 	}
 	
-	printf("], marker=\"o\", markersize=\"20\")\n");
+	printf("], marker=\"o\", markersize=20)\n");
 	printf("p.show\n");
 	
 	free(y);
