@@ -44,9 +44,10 @@ int main(int argc, char** argv) {
 		       - 2 * (1 + alpha) * (i - 2) * pow(h, 2) * sqrt(y[i-2]);
 	}
 	
+	// output the points
 	for(int i = 0; i < steps; i++) {
 		if(!isnan(y[i])) {
-			printf("[%Lf, %Lf]\n", i * h, y[i]);
+			printf("%Lf %Lf\n", i * h, y[i]);
 		}
 	}
 	

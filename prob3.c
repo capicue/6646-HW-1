@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
 	
 	// output the points
 	for(int i = 0; i < steps; i++) {
-		printf("[%Lf, %Lf]\n", y[i][0], y[i][1]);
+		printf("%Lf %Lf\n", y[i][0], y[i][1]);
 	}
 	
 	free(y);

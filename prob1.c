@@ -52,8 +52,9 @@ int main(int argc, char** argv) {
 		y[i] = (-c + sqrt(pow(c,2) - 4 * d))/2;
 	}
 	
+	// output the points
 	for(int i = 0; i < steps; i++) {
-		printf("[%Lf, %Lf]\n", i * h, y[i]);
+		printf("%Lf %Lf\n", i * h, y[i]);
 	}
 	
 	free(y);
