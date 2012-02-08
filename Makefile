@@ -1,4 +1,4 @@
-PROGS  := prob1 prob2
+PROGS  := prob1 prob2 prob3
 SRCDIR  := src
 BINDIR  := bin
 PLOTDIR := plot
@@ -13,20 +13,23 @@ LD        := /usr/bin/clang
 PLOT      := $(BINDIR)/plot.py
 CFLAGS    := -std=c99 -Wall -Wextra -Werror -g
 LDFLAGS   :=
-PLOTFLAGS := --markersize=20 -f "(1 + x**2)**2"
 
 all: $(BINS)
 
 plots: $(BINS) $(PLOT) $(PLOTDIR)
-	$(BINDIR)/prob1 0.1      | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_1_1
-	$(BINDIR)/prob1 0.05     | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_1_2
-	$(BINDIR)/prob1 0.025    | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_1_3
-	$(BINDIR)/prob2 0 0.1    | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_2_1
-	$(BINDIR)/prob2 0 0.05   | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_2_2
-	$(BINDIR)/prob2 0 0.025  | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_2_3
-	$(BINDIR)/prob2 -5 0.1   | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_2_4 --xmax=2 --ymin="-15" --ymax="25"
-	$(BINDIR)/prob2 -5 0.05  | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_2_5 --xmax=2 --ymin="-15" --ymax="25"
-	$(BINDIR)/prob2 -5 0.025 | $(PLOT) $(PLOTFLAGS) -o $(PLOTDIR)/plot_2_6 --xmax=2 --ymin="-15" --ymax="25"
+	$(BINDIR)/prob1 0.1      | $(PLOT) -o $(PLOTDIR)/plot_1_1 \
+	-f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob1 0.05     | $(PLOT) -o $(PLOTDIR)/plot_1_2 -f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob1 0.025    | $(PLOT) -o $(PLOTDIR)/plot_1_3 -f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob2 0 0.1    | $(PLOT) -o $(PLOTDIR)/plot_2_1 -f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob2 0 0.05   | $(PLOT) -o $(PLOTDIR)/plot_2_2 -f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob2 0 0.025  | $(PLOT) -o $(PLOTDIR)/plot_2_3 -f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob2 -5 0.1   | $(PLOT) -o $(PLOTDIR)/plot_2_4 -f "(1 + x**2)**2" --xmax=2 --ymin="-15" --ymax="25" --markersize=20
+	$(BINDIR)/prob2 -5 0.05  | $(PLOT) -o $(PLOTDIR)/plot_2_5 -f "(1 + x**2)**2" --xmax=2 --ymin="-15" --ymax="25" --markersize=20
+	$(BINDIR)/prob2 -5 0.025 | $(PLOT) -o $(PLOTDIR)/plot_2_6 -f "(1 + x**2)**2" --xmax=2 --ymin="-15" --ymax="25" --markersize=20
+	$(BINDIR)/prob3 -f       | $(PLOT) -o $(PLOTDIR)/plot_3_1 --markersize=1 --aspectratio=1
+	$(BINDIR)/prob3 -b       | $(PLOT) -o $(PLOTDIR)/plot_3_2 --markersize=1 --aspectratio=1
+	$(BINDIR)/prob3 -t       | $(PLOT) -o $(PLOTDIR)/plot_3_3 --markersize=1 --aspectratio=1
 
 $(BINS): $(BINDIR)/%: $(SRCDIR)/%.o
 	$(LD) $(LDFLAGS) -o $@ $<
