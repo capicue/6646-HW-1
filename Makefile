@@ -1,4 +1,4 @@
-PROGS  := prob1 prob2 prob3
+PROGS   := prob1 prob2 prob3
 SRCDIR  := src
 BINDIR  := bin
 PLOTDIR := plot
@@ -17,8 +17,7 @@ LDFLAGS   :=
 all: $(BINS)
 
 plots: $(BINS) $(PLOT) $(PLOTDIR)
-	$(BINDIR)/prob1 0.1      | $(PLOT) -o $(PLOTDIR)/plot_1_1 \
-	-f "(1 + x**2)**2" --markersize=20
+	$(BINDIR)/prob1 0.1      | $(PLOT) -o $(PLOTDIR)/plot_1_1 -f "(1 + x**2)**2" --markersize=20
 	$(BINDIR)/prob1 0.05     | $(PLOT) -o $(PLOTDIR)/plot_1_2 -f "(1 + x**2)**2" --markersize=20
 	$(BINDIR)/prob1 0.025    | $(PLOT) -o $(PLOTDIR)/plot_1_3 -f "(1 + x**2)**2" --markersize=20
 	$(BINDIR)/prob2 0 0.1    | $(PLOT) -o $(PLOTDIR)/plot_2_1 -f "(1 + x**2)**2" --markersize=20
