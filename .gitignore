@@ -1,3 +1,15 @@
 bin/*
 plot/*
 src/*.o
+
+# Latex generated files #
+#########################
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
+
+# OS X files #
+##############
+.DS_Store*
