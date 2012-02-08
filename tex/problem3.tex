@@ -1,0 +1,10 @@
+\begin{problem}[A\&P 3.2]
+  To draw a circle of radius $r$ on a graphics screen, one may proceed to evaluate pairs of values $x = r \cos \theta$, $y = r \sin \theta$ for a succession of values $\theta$. But this is expensive. A cheaper method may be obtained by considering the ODE
+  \begin{alignat*}{2}
+    \dot{x} &= -y, \quad&\quad x(0) &= r, \\
+    \dot{y} &= x,  \quad&\quad y(0) &= 0, 
+  \end{alignat*}
+  where $\dot{x} = \frac{dx}{d\theta}$, and approximating this using a simple discretization method. However, care must be taken so as to ensure that the obtained approximate solution looks right, i.e., that the approximate curve closes rather than spirals.
+  
+  For each of the three discretization methods introduced in this chapter, namely, forward Euler, backward Euler, and trapezoidal methods, carry out this integration using a uniform step size $h = .02$ for $0 \leq \theta \leq 120$. Determine if the solution spirals in, spirals out, or forms an approximate circle as desired. Explain the observed results.
+\end{problem}

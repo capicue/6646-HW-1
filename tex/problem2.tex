@@ -1,0 +1,26 @@
+\begin{problem}[L 2.5.4]
+  Demonstrate the effect of zero-instability by using the method
+  \[
+    y_{n + 2} - (1 + \alpha)y_{n + 1} + \alpha y_n = \frac{h}{2}\left[(3-\alpha) f(x_{n+1}, y_{n+1}) - (1 + \alpha) f(x_n, y_n)\right]
+  \]
+  with (i) $\alpha = 0$, (ii) $\alpha = -5$ to compute numerical solutions of the scalar initial value problem $y' = 4xy^{1/2}$, $y(0) = 1$ for $0 \leq x \leq 2$, using the steplengths $h = 0.1, 0.05, 0.025$.
+\end{problem}
+
+\begin{solution}
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.3]{plot_2_1.png}
+    \includegraphics[scale=0.3]{plot_2_2.png}
+    \includegraphics[scale=0.3]{plot_2_3.png}
+    \caption{$\alpha = 0$ with $h = 0.1$, $h = 0.05$, $h = 0.025$}
+    \label{fig:prob2_1}
+  \end{figure}
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.3]{plot_2_4.png}
+    \includegraphics[scale=0.3]{plot_2_5.png}
+    \includegraphics[scale=0.3]{plot_2_6.png}
+    \caption{$\alpha = -5$ with $h = 0.1$, $h = 0.05$, $h = 0.025$}
+    \label{fig:prob2_2}
+  \end{figure}
+\end{solution}

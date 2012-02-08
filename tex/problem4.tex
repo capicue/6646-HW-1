@@ -1,0 +1,12 @@
+\begin{problem}[A\&P 3.3]
+  The following ODE system:
+  \begin{align*}
+    y_1' = \alpha - y_1 - \frac{4y_1 y_2}{1 + y_1^2}, \\
+    y_2' = \beta y_1 \left(1 - \frac{y_2}{1 + y_1^2}\right),
+  \end{align*}
+  where $\alpha$ and $\beta$ are parameters, represents a simplified approximation to a chemical reaction. There is a parameter value $\beta_c = \frac{3\alpha}{5} - \frac{25}{\alpha}$ such that for $\beta > \beta_c$ solution trajectories decay in amplitude and spiral in phase space into a stable fixed point, whereas for $\beta < \beta_c$ trajectories oscillate without damping and are attracted to a stable limit cycle. [This is called a \emph{Hopf bifurcation}.]
+  \begin{enumerate}[(a)]
+    \item Set $\alpha = 10$ and use any of the discretization methods introduced in this chapter with a fixed step size $h = .01$ to approximate the solution starting at $y_1(0) = 0$, $y_2(0) = 2$, for $0 \leq t \leq 20$. Do this for the parameter values $\beta = 2$ and $\beta = 4$. For each case plot $y_1$ vs. $t$ and $y_2$ vs. $y_1$. Describe your observations.
+    \item Investigate the situation closer to the critical value $\beta_c = 3.5$.
+  \end{enumerate}
+\end{problem}

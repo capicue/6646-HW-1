@@ -1,0 +1,29 @@
+\begin{problem}[A\&P 3.9]
+  Write a short program which uses the forward Euler, the backward Euler, and the trapezoidal \emph{or} midpoint methods to integrate a linear scalar ODE with a known solution, using a fixed step size $h = b/N$, and which finds the maximum error. Apply your program to the following problem:
+  \[
+    \frac{dy}{dt} = (\cos t) y, \qquad 0 \leq t \leq b,
+  \]
+  $y(0) = 1$. The exact solution is
+  \[
+    y(t) = e^{\sin t}.
+  \]
+  Verify the entries given in the table and complete the missing ones. Make as many (useful) observations as you can on the results in the complete table. Attempt to provide explanations.
+  \\
+  
+  \begin{tabular}{|cccccc|}
+    \hline
+    $b$ & $N$ & F. Euler & B. Euler & Trapezoidal & Midpoint \\
+    \hline
+    $1$    & $10$     & $.35e^{-1}$ & $.36e^{-1}$    & $.29e^{-2}$ & $.22e^{-2}$ \\
+           & $20$     & $.18e^{-1}$ & $.18e^{-1}$    & $.61e^{-1}$ & $.51e^{-3}$ \\
+    $10$   & $100$    &             &                &             &             \\
+           & $200$    &             &                &             &             \\
+    $100$  & $1000$   & $2.46$      & $25.90$        & $.42e^{-2}$ & $.26e^{-2}$ \\
+           & $2000$   &             &                &             &             \\
+    $1000$ & $1000$   &             &                &             &             \\
+           & $10000$  & $2.72$      & $1.79e^{+11} $ & $.42e^{-2}$ & $.26e^{-2}$ \\
+           & $20000$  &             &                &             &             \\
+           & $100000$ & $2.49$      & $29.77$        & $.42e^{-4}$ & $.26e^{-4}$ \\
+    \hline
+  \end{tabular}
+\end{problem}
