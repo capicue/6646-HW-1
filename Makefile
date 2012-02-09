@@ -1,4 +1,4 @@
-PROGS   := prob1 prob2 prob3
+PROGS   := prob1 prob2 prob3 prob4
 SRCDIR  := src
 BINDIR  := bin
 PLOTDIR := plot
@@ -29,6 +29,12 @@ plots: $(BINS) $(PLOT) $(PLOTDIR)
 	$(BINDIR)/prob3 -f       | $(PLOT) -o $(PLOTDIR)/plot_3_1 --markersize=1 --aspectratio=1
 	$(BINDIR)/prob3 -b       | $(PLOT) -o $(PLOTDIR)/plot_3_2 --markersize=1 --aspectratio=1
 	$(BINDIR)/prob3 -t       | $(PLOT) -o $(PLOTDIR)/plot_3_3 --markersize=1 --aspectratio=1
+	$(BINDIR)/prob4 -t 2     | $(PLOT) -o $(PLOTDIR)/plot_4_1 --markersize=1
+	$(BINDIR)/prob4 -p 2     | $(PLOT) -o $(PLOTDIR)/plot_4_2 --markersize=1
+	$(BINDIR)/prob4 -t 4     | $(PLOT) -o $(PLOTDIR)/plot_4_3 --markersize=1
+	$(BINDIR)/prob4 -p 4     | $(PLOT) -o $(PLOTDIR)/plot_4_4 --markersize=1
+	$(BINDIR)/prob4 -t 3.5   | $(PLOT) -o $(PLOTDIR)/plot_4_5 --markersize=1
+	$(BINDIR)/prob4 -p 3.5   | $(PLOT) -o $(PLOTDIR)/plot_4_6 --markersize=1
 
 $(BINS): $(BINDIR)/%: $(SRCDIR)/%.o
 	$(LD) $(LDFLAGS) -o $@ $<
