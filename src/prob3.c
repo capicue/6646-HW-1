@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 	long double  r        = 1.0;
 	long double  h        = 0.02;
 	long double  (* y)[2] = NULL;
-	long long    steps    = 0;
+	long         steps    = 0;
 	
 	parse_args(argc, argv, &method);
 	
@@ -104,6 +104,7 @@ void parse_args(int argc, char** argv, int* method) {
 				printf("-f     forward euler\n\n");
 				printf("-b     backward euler\n\n");
 				printf("-t     trapezoidal\n\n");
+				exit(0);
 			default:
 				printf("usage: prob1 [-f | -b | -t | -h]\n");
 				exit(1);
