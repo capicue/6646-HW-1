@@ -7,20 +7,41 @@
 \end{problem}
 
 \begin{solution}
-  \begin{figure}[!ht]
-    \centering
-    \includegraphics[scale=0.3]{../plot/plot_2_1.png}
-    \includegraphics[scale=0.3]{../plot/plot_2_2.png}
-    \includegraphics[scale=0.3]{../plot/plot_2_3.png}
-    \caption{$\alpha = 0$ with $h = 0.1$, $h = 0.05$, $h = 0.025$}
-    \label{fig:prob2_1}
-  \end{figure}
-  \begin{figure}[!ht]
-    \centering
-    \includegraphics[scale=0.3]{../plot/plot_2_4.png}
-    \includegraphics[scale=0.3]{../plot/plot_2_5.png}
-    \includegraphics[scale=0.3]{../plot/plot_2_6.png}
-    \caption{$\alpha = -5$ with $h = 0.1$, $h = 0.05$, $h = 0.025$}
-    \label{fig:prob2_2}
-  \end{figure}
+  Using $f(x, y) = 4xy^{1/2}$, the method simplifies to
+  \[
+    y_{n+2} = (1 + \alpha) y_{n+1} - \alpha y_n + 2 h^2 (3-\alpha) (n+1) y_{n+1}^{1/2} - 2 h^2 n (1 + \alpha) y_n^{1/2}.
+  \]
+  \begin{enumerate}[(i)]
+    \item 
+    When $\alpha = 0$, the characteristic polynomial for the method is
+    \[
+      \rho(\zeta) = \zeta^2 - \zeta.
+    \]
+    The roots of this are $0$ and $1$. This method satisfies the root condition and therefore is zero-stable. It is evident from the figure \ref{fig:prob2_1} that the numerical solution is converging to the actual solution.
+    \begin{figure}[!ht]
+      \centering
+      \includegraphics[scale=0.3]{../plot/plot_2_1.png}
+      \includegraphics[scale=0.3]{../plot/plot_2_2.png}
+      \includegraphics[scale=0.3]{../plot/plot_2_3.png}
+      \caption{$\alpha = 0$ with $h = 0.1$, $h = 0.05$, $h = 0.025$}
+      \label{fig:prob2_1}
+    \end{figure}
+    \FloatBarrier
+    \item
+    When $\alpha = -5$, the characteristic polynomial for the method is
+    \begin{align*}
+      \rho(\zeta) 
+      &= \zeta^2 + 4\zeta - 5 \\
+      &= (\zeta + 5)(\zeta - 1).
+    \end{align*}
+    The roots of this are $-5$ and $1$. This method does not satisfy the root condition and therefore is not zero-stable. Figure \ref{fig:prob2_2} demonstrate the effect of zero-instability. The numerical solution remains unstable no matter how small we choose $h$.
+    \begin{figure}[!ht]
+      \centering
+      \includegraphics[scale=0.3]{../plot/plot_2_4.png}
+      \includegraphics[scale=0.3]{../plot/plot_2_5.png}
+      \includegraphics[scale=0.3]{../plot/plot_2_6.png}
+      \caption{$\alpha = -5$ with $h = 0.1$, $h = 0.05$, $h = 0.025$}
+      \label{fig:prob2_2}
+    \end{figure}
+  \end{enumerate}
 \end{solution}
