@@ -3,14 +3,6 @@
 \end{problem}
 
 \begin{solution}
-  \begin{figure}[!ht]
-    \centering
-    \includegraphics[scale=0.3]{../plot/plot_1_1.png}
-    \includegraphics[scale=0.3]{../plot/plot_1_2.png}
-    \includegraphics[scale=0.3]{../plot/plot_1_3.png}
-    \caption{$h = 0.1$, $h = 0.05$, $h = 0.025$}
-    \label{fig:prob1}
-  \end{figure}
   We are using the method
   \[
     y_{n + 2} - y_{n + 1} = \frac{h}{12}\left[4 f(x_{n + 2}, y_{n + 2}) + 8 f(x_{n + 1}, y_{n + 1}) - f(x_n, y_n)\right].
@@ -39,7 +31,16 @@
   \]
   We use this to solve the problem numerically for $h = 0.1$, $0.05$, and $0.025$.
   
-  Figure \ref{fig:prob1} shows the numerical solutions for the different $h$ values compared with the actual solution of $y(x) = (1+x^2)^2$. It is obvious from the images that the numerical solution is not converging to the actual solution.
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.3]{../plot/plot_1_1.png}
+    \includegraphics[scale=0.3]{../plot/plot_1_2.png}
+    \includegraphics[scale=0.3]{../plot/plot_1_3.png}
+    \caption{$h = 0.1$, $h = 0.05$, $h = 0.025$}
+    \label{fig:prob1}
+  \end{figure}
+  
+  Figure \ref{fig:prob1} shows the numerical solutions for the different $h$ values compared with the actual solution of $y(x) = (1+x^2)^2$. It is obvious from the images that the numerical solution is converging, but not to the  actual solution.
   
   We can see why this is happening by analyzing the consistency of the method. The characteristic polynomial associated with the method is $\rho(\zeta) = \zeta^2 - \zeta$. Then $\rho'(1) = 1$. We know
   \[
@@ -53,5 +54,5 @@
     &= \tfrac{11}{12}f(x_n,y(x_n)).
   \end{align*}
   
-  Since $\phi_f(y(x_n), y(x_n), y(x_n), x_n; 0)/\rho'(1) \neq f(x_n,y(x_n))$, the method is not consistent.
+  Since $\phi_f(y(x_n), y(x_n), y(x_n), x_n; 0)/\rho'(1) \neq f(x_n,y(x_n))$, the method is not consistent and the numerical solutions are not converging to the exact solution as $h \to 0$.
 \end{solution}
