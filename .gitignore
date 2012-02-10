@@ -1,6 +1,7 @@
 bin/*
 plot/*
 src/*.o
+out/*
 
 # Latex generated files #
 #########################
