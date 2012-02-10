@@ -29,15 +29,17 @@ For each method, use different $h$ values and include a table showing the values
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 
 struct globalArgs_t {
 	int    function;  // -f option
 	int    method;    // -m option
 	double theta;     // -t option
+	bool   error;     // -e option
 	double h;         // -s option
 } globalArgs;
 
-static const char* optString = "f:m:s:t:h";
+static const char* optString = "f:m:s:t:eh";
 
 /* Display the program usage.
  */
@@ -47,10 +49,15 @@ void display_usage(void);
  */
 void parse_args(int argc, char** argv, const char* optString);
 
+/* Check if current error is largest.
+ */
+void check_error(double* error, double value, int function, double time);
+
 int main(int argc, char** argv) {
 	long         steps = 0;
 	const int    t_max = 25;
 	long double* y     = NULL;
+	double       error = 0;
 	
 	double       a     = 0;
 	double       c     = 0;
@@ -59,6 +66,7 @@ int main(int argc, char** argv) {
 	globalArgs.function = 1;
 	globalArgs.method   = 1;
 	globalArgs.theta    = 0.5;
+	globalArgs.error    = false;
 	globalArgs.h        = 0.1;
 	
 	parse_args(argc, argv, optString);
@@ -87,6 +95,9 @@ int main(int argc, char** argv) {
 						       globalArgs.h * (i-1)) * pow(y[i-1],2) + 
 						       (5.0/(1 + globalArgs.h * (i-1))) - (1/pow(1 + 
 						       globalArgs.h * (i-1), 2)));
+						if (globalArgs.error) {
+							check_error(&error, y[i], globalArgs.function, 1 + globalArgs.h*i);
+						}
 					}
 					break;
 				case 2: // Backward Euler
@@ -95,6 +106,9 @@ int main(int argc, char** argv) {
 						c = -y[i-1] - (5.0 * globalArgs.h)/(i * globalArgs.h 
 						    + 1) + globalArgs.h/pow(i * globalArgs.h + 1, 2);
 						y[i] = (-1 + sqrt(1 - 4 * a * c))/(2 * a);
+						if (globalArgs.error) {
+							check_error(&error, y[i], globalArgs.function, 1 + globalArgs.h*i);
+						}
 					}
 					break;
 				case 3: // Theta Method
@@ -108,6 +122,9 @@ int main(int argc, char** argv) {
 						    + 5/(globalArgs.h * (i-1) + 1) - 
 						    1/pow(globalArgs.h * i + 1, 2)));
 						y[i] = (-1 + sqrt(1 - 4 * a * c))/(2 * a);
+						if (globalArgs.error) {
+							check_error(&error, y[i], globalArgs.function, 1 + globalArgs.h*i);
+						}
 					}
 					break;
 			}
@@ -119,12 +136,18 @@ int main(int argc, char** argv) {
 					for (int i=1; i <= steps; i++) {
 						y[i] = y[i-1] + globalArgs.h * (y[i-1] * sin(2 * 
 						       globalArgs.h * (i-1) + 3));
+						if (globalArgs.error) {
+							check_error(&error, y[i], globalArgs.function, globalArgs.h*i);
+						}
 					}
 					break;
 				case 2: // Backward Euler
 					for (int i=1; i <= steps; i++) {
 						y[i] = y[i-1]/(1 - globalArgs.h * sin(2 * 
 						       globalArgs.h * i + 3));
+						if (globalArgs.error) {
+							check_error(&error, y[i], globalArgs.function, globalArgs.h*i);
+						}
 					}
 					break;
 				case 3: // Theta Method
@@ -134,24 +157,49 @@ int main(int argc, char** argv) {
 						       globalArgs.h * (i-1) + 3)))/(1 - globalArgs.h 
 						       * globalArgs.theta * sin(2 * globalArgs.h * 
 						       i + 3));
+						if (globalArgs.error) {
+							check_error(&error, y[i], globalArgs.function, globalArgs.h*i);
+						}
 					}
 					break;
 			}
 			break;
 	}
 	
-	// Output the points
-	switch (globalArgs.function) {
-		case 1:
-			for (int i=0; i <= steps; i++) {
-				printf("%f %Lf\n", i*globalArgs.h+1, y[i]);
-			}
-			break;
-		case 2:
-			for (int i=0; i <= steps; i++) {
-				printf("%f %Lf\n", i*globalArgs.h, y[i]);
-			}
-			break;
+	if (globalArgs.error) {
+		// Output the error
+		printf("function %d, ", globalArgs.function);
+		switch (globalArgs.method) {
+			case 1:
+				printf("F. Euler,               ");
+				break;
+			case 2:
+				printf("B. Euler,               ");
+				break;
+			case 3:
+				printf("Theta,    ");
+				printf("theta = %.2f, ", globalArgs.theta);
+				break;
+		}
+		printf("h = %.3f, ", globalArgs.h);
+		printf("ymax = %.3Lf, ", y[steps]);
+		printf("error = %.3e\n", error);
+		
+	}
+	else {
+		// Output the points
+		switch (globalArgs.function) {
+			case 1:
+				for (int i=0; i <= steps; i++) {
+					printf("%f %Lf\n", i*globalArgs.h+1, y[i]);
+				}
+				break;
+			case 2:
+				for (int i=0; i <= steps; i++) {
+					printf("%f %Lf\n", i*globalArgs.h, y[i]);
+				}
+				break;
+		}
 	}
 	
 	free(y);
@@ -221,6 +269,9 @@ void parse_args(int argc, char** argv, const char* optString) {
 					exit(EXIT_FAILURE);
 				}
 				break;
+			case 'e':
+				globalArgs.error = true;
+				break;
 			case 'h':
 				display_usage();
 				break;
@@ -229,5 +280,20 @@ void parse_args(int argc, char** argv, const char* optString) {
 		}
 		
 		opt = getopt(argc, argv, optString);
+	}
+}
+
+void check_error(double* error, double value, int function, double time) {
+	double err = 0;
+	switch (function) {
+		case 1:
+			err = fabs(value - 1/(time));
+			break;
+		case 2:
+			err = fabs(value - exp((1.0/2.0)*(cos(3.0) - cos(2*time + 3))));
+			break;
+	}
+	if (err > *error) {
+		*error = err;
 	}
 }
