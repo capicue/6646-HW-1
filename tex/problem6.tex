@@ -21,3 +21,62 @@
   
   For each method, use different $h$ values and include a table showing the values at the end points and maximum error. Analyze the consistency, $0$-stability and convergence based on the theories learned in class. 
 \end{problem}
+
+\begin{solution}
+  \begin{enumerate}[(1)]
+    \item The general solution to the first order nonlinear Riccati equation
+    \[
+      y' = -5ty^2 + \frac{5}{t} - \frac{1}{t^2}
+    \]
+    is
+    \[
+      y(t) = \frac{c e^{10t} - 10t + 1}{(c e^{10t} + 1)t + 10 t^2}.
+    \]
+    As the initial value of $y(1)$ approaches $1$, the value of the constant goes to infinity. Thus, the solution for the initial value problem with $y(1) = 1$ is
+    \[
+      y(t) = \frac{1}{t}.
+    \]
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
+      \hline
+      $0.1$   & $\num{9.09e-3}$ & $\num{5.21e-3}$ & $\num{6.03e-3}$ & $\num{6.61e-3}$ \\
+      $0.05$  & $\num{3.43e-3}$ & $\num{2.80e-3}$ & $\num{2.99e-3}$ & $\num{3.12e-3}$ \\
+      $0.025$ & $\num{1.60e-3}$ & $\num{1.45e-3}$ & $\num{1.51e-3}$ & $\num{1.54e-3}$ \\
+      $0.01$  & $\num{6.20e-4}$ & $\num{5.97e-4}$ & $\num{6.06e-4}$ & $\num{6.10e-4}$ \\
+      \hline
+    \end{tabular}
+    \item The general solution to the first order linear equation
+    \[
+      y' = y \sin(2t + 3)
+    \]
+    is 
+    \[
+      y(t) = c e^{-\frac12 \cos(2t + 3)}.
+    \]
+    Using the initial value $y(0) = 1$, we get 
+    \[
+      y(t) = e^{\frac12 \cos(3)-\frac12 \cos(2t + 3)}.
+    \]
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
+      \hline
+      $0.1$   & $\num{4.57e-1}$ & $\num{8.71e-1}$ & $\num{1.59e-3}$ & $\num{2.65e-1}$ \\
+      $0.05$  & $\num{2.65e-1}$ & $\num{3.65e-1}$ & $\num{3.96e-4}$ & $\num{1.43e-1}$ \\
+      $0.025$ & $\num{1.43e-1}$ & $\num{1.68e-1}$ & $\num{9.90e-5}$ & $\num{7.42e-2}$ \\
+      $0.01$  & $\num{5.99e-2}$ & $\num{6.38e-2}$ & $\num{1.58e-5}$ & $\num{3.04e-2}$ \\
+      \hline
+    \end{tabular}
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
+      \hline
+      $0.1$   & $0.51$ & $1.84$ & $0.97$ & $0.70$ \\
+      $0.05$  & $0.70$ & $1.33$ & $0.97$ & $0.82$ \\
+      $0.025$ & $0.82$ & $1.13$ & $0.97$ & $0.89$ \\
+      $0.01$  & $0.91$ & $1.03$ & $0.97$ & $0.93$ \\
+      \hline
+    \end{tabular}
+  \end{enumerate}
+\end{solution}
