@@ -18,4 +18,56 @@
     \caption{Forward Euler, Backward Euler, and Trapezoidal}
     \label{fig:prob3}
   \end{figure}
+  We can see from figure \ref{fig:prob3} that the forward Euler method spirals outward, the backward Euler method spirals inward, and the trapezoidal method gives a good approximation to a circle.
+  
+  \begin{enumerate}[(i)]
+    \item 
+    To approximate using the forward Euler method, we use the equations
+    \begin{align*}
+      x_n &= x_{n-1} - h y_{n-1} \\
+      y_n &= y_{n-1} + h x_{n-1}.
+    \end{align*}
+    
+    Each step in the forward Euler method involves taking a straight line in the direction of the tangent at point $(t_{n-1}, y_{n-1})$. On a circle this line will always be on the outside. Every step results in an approximation that is farther away from the circle than the step before it. As these errors build up over time, the approximate solution spirals outward.
+    
+    We know that the forward Euler method is first order, i.e., the global truncation error is proportional to the step size, $h$. This explains why after a significant number of steps (this problem uses 6000), the global error can be large. The global error decreases slowly as $h \to 0$.
+    \item
+    For the backward Euler method, we begin with the equations
+    \begin{align*}
+      x_n &= x_{n-1} - h y_n \\
+      y_n &= y_{n-1} + h x_n.
+    \end{align*}
+    This is a linear system of equations, and we can solve for $x_n$, $y_n$. We get
+    \begin{align*}
+      x_n &= \frac{1}{1+h^2}(x_{n-1} - h y_{n-1}) \\
+      y_n &= y_{n-1} + h x_n. \\
+    \end{align*}
+    
+    Each step in the backward Euler method involves solving for $y_{n+1}$ so that 
+    \[
+      \frac{y_{n+1} - y_{n}}{h} = f(t_{n+1}, y_{n+1}).
+    \]
+    That is, $y_{n+1}$ is chosen so that the derivative matches up with the derivative at time $t_{n+1}$. This method is essentially using the slope of the tangent at the future point, it spirals inward toward the center of the circle.
+    
+    The backward Euler method has more stability than the forward Euler method, but it is still a first order method. Since the accumulated error in the forward Euler method was due mostly to the low order of accuracy, we face the same problem with the backward Euler method.
+    \item
+    For the trapezoidal method, we begin with the equations
+    \begin{align*}
+      x_n &= x_{n-1} - \frac{h}{2}(y_n + y_{n-1}) \\
+      y_n &= y_{n-1} + \frac{h}{n}(x_n + x_{n-1}).
+    \end{align*}
+    Solving these, we get
+    \begin{align*}
+      x_n &= \frac{4 - h^2}{4 + h^2} x_{n-1} - \frac{4h}{4 + h^2} y_{n-1} \\
+      y_n &= y_{n-1} + \frac{h}{2} x_n + \frac{h}{2} x_{n-1}.
+    \end{align*}
+    
+    The forward Euler method had significant error because it was derived using a Taylor expansion centered at $t_{n-1}$. The backward Euler method also had significant error because its derivation is centered at $t_n$. The trapezoidal method achieves better accuracy by averaging these and using a derivation centered at 
+    \[
+      t_{n-1/2} = t_n - \frac12 h_n.
+    \]
+    
+    The trapezoidal method is better because it is second order accurate, so the error decreases like $h^2$ instead of just $h$. For our specific example, it also has the effect of canceling the outward error of the forward Euler method with the inward error of the backward Euler method. It gives a very good approximation to a circle, even after a large number of steps.
+  \end{enumerate}
+  
 \end{solution}
