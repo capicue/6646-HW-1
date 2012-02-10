@@ -1,4 +1,4 @@
-PROGS   := prob1 prob2 prob3 prob4 prob5
+PROGS   := prob1 prob2 prob3 prob4 prob5 prob6
 SRCDIR  := src
 BINDIR  := bin
 PLOTDIR := plot
@@ -87,6 +87,39 @@ plots: $(BINS) $(PLOT) $(PLOTDIR)
 	$(BINDIR)/prob5 -m -e 1000 10000   >> $(OUTDIR)/error
 	$(BINDIR)/prob5 -m -e 1000 20000   >> $(OUTDIR)/error
 	$(BINDIR)/prob5 -m -e 1000 100000  >> $(OUTDIR)/error
+	# Problem 6 plots
+	$(BINDIR)/prob6 -f 1 -m f -s 0.1           | $(PLOT) -o $(PLOTDIR)/plot_6_1  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m f -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_2  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m f -s 0.025         | $(PLOT) -o $(PLOTDIR)/plot_6_3  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m f -s 0.01          | $(PLOT) -o $(PLOTDIR)/plot_6_4  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m b -s 0.1           | $(PLOT) -o $(PLOTDIR)/plot_6_5  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m b -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_6  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m b -s 0.025         | $(PLOT) -o $(PLOTDIR)/plot_6_7  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m b -s 0.01          | $(PLOT) -o $(PLOTDIR)/plot_6_8  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.5 -s 0.1    | $(PLOT) -o $(PLOTDIR)/plot_6_9  --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.5 -s 0.05   | $(PLOT) -o $(PLOTDIR)/plot_6_10 --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.5 -s 0.025  | $(PLOT) -o $(PLOTDIR)/plot_6_11 --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.5 -s 0.01   | $(PLOT) -o $(PLOTDIR)/plot_6_12 --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.25 -s 0.1   | $(PLOT) -o $(PLOTDIR)/plot_6_13 --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.25 -s 0.05  | $(PLOT) -o $(PLOTDIR)/plot_6_14 --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.25 -s 0.025 | $(PLOT) -o $(PLOTDIR)/plot_6_15 --markersize=1
+	$(BINDIR)/prob6 -f 1 -m t -t 0.25 -s 0.01  | $(PLOT) -o $(PLOTDIR)/plot_6_16 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m f -s 0.1           | $(PLOT) -o $(PLOTDIR)/plot_6_17 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m f -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_18 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m f -s 0.025         | $(PLOT) -o $(PLOTDIR)/plot_6_19 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m f -s 0.01          | $(PLOT) -o $(PLOTDIR)/plot_6_20 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m b -s 0.1           | $(PLOT) -o $(PLOTDIR)/plot_6_21 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m b -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_22 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m b -s 0.025         | $(PLOT) -o $(PLOTDIR)/plot_6_23 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m b -s 0.01          | $(PLOT) -o $(PLOTDIR)/plot_6_24 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.5 -s 0.1    | $(PLOT) -o $(PLOTDIR)/plot_6_25 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.5 -s 0.05   | $(PLOT) -o $(PLOTDIR)/plot_6_26 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.5 -s 0.025  | $(PLOT) -o $(PLOTDIR)/plot_6_27 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.5 -s 0.01   | $(PLOT) -o $(PLOTDIR)/plot_6_28 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.25 -s 0.1   | $(PLOT) -o $(PLOTDIR)/plot_6_29 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.25 -s 0.05  | $(PLOT) -o $(PLOTDIR)/plot_6_30 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.25 -s 0.025 | $(PLOT) -o $(PLOTDIR)/plot_6_31 --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.25 -s 0.01  | $(PLOT) -o $(PLOTDIR)/plot_6_32 --markersize=1
 
 $(BINS): $(BINDIR)/%: $(SRCDIR)/%.o
 	$(LD) $(LDFLAGS) -o $@ $<
