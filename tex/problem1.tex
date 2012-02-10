@@ -3,33 +3,6 @@
 \end{problem}
 
 \begin{solution}
-  We are using the method
-  \[
-    y_{n + 2} - y_{n + 1} = \frac{h}{12}\left[4 f(x_{n + 2}, y_{n + 2}) + 8 f(x_{n + 1}, y_{n + 1}) - f(x_n, y_n)\right].
-  \]
-  In this case, $f(x, y) = 4xy^{1/2}$, and $x_n = nh$. We can use this to simplify the method.
-  \begin{align*}
-    y_{n + 2} - y_{n + 1} &= \frac{h}{12}\left[16 x_{n + 2} \sqrt{y_{n + 2}} + 32 x_{n + 1} y_{n + 1}^{1/2} - 4 x_n y_n^{1/2}\right] \\
-    y_{n + 2} - y_{n + 1} &= \frac{h}{12}\left[16 (n + 2) h \sqrt{y_{n + 2}} + 32 (n + 1) h y_{n + 1}^{1/2} - 4 n h y_n^{1/2}\right] \\
-    y_{n + 2} - y_{n + 1} &= \frac{4}{3} (n + 2) h^2 \sqrt{y_{n + 2}} + \frac{8}{3} (n + 1) h^2 y_{n + 1}^{1/2} - \frac{1}{3} n h^2 y_n^{1/2} \\
-    \frac{4}{3} (n + 2) h^2 \sqrt{y_{n + 2}} &= y_{n + 2} + \frac{1}{3} n h^2 y_n^{1/2} - \frac{8}{3} (n + 1) h^2 y_{n + 1}^{1/2} - y_{n + 1} \\
-  \end{align*}
-  Let
-  \begin{align*}
-    A &= \frac{4}{3} (n + 2) h^2 \\
-    B &= \frac{1}{3} n h^2 y_n^{1/2} - \frac{8}{3} (n + 1) h^2 y_{n + 1}^{1/2} - y_{n + 1}.
-  \end{align*}
-  Then we have
-  \begin{align*}
-    A \sqrt{y_{n + 2}} &= y_{n + 2} + B \\
-    A^2 y_{n + 2} &= y_{n + 2}^2 + 2 B y_{n + 2} + B^2 \\
-    0 &= y_{n+2}^2 + (2B - A^2)y_{n+2} + B^2. \\
-  \end{align*}
-  Solving for $y_{n + 2}$, we get
-  \[
-    y_{n + 2} = \frac{-C + \sqrt{C^2 - 4D}}{2}.
-  \]
-  
   \begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.3]{../plot/plot_1_1.png}
@@ -38,4 +11,47 @@
     \caption{$h = 0.1$, $h = 0.05$, $h = 0.025$}
     \label{fig:prob1}
   \end{figure}
+  We are using the method
+  \[
+    y_{n + 2} - y_{n + 1} = \frac{h}{12}\left[4 f(x_{n + 2}, y_{n + 2}) + 8 f(x_{n + 1}, y_{n + 1}) - f(x_n, y_n)\right].
+  \]
+  In this case, $f(x, y) = 4xy^{1/2}$, and $x_n = nh$. We can use this to simplify the method. After a bit of computation, we have
+  \[
+    \frac{4}{3} (n + 2) h^2 \sqrt{y_{n + 2}} = y_{n + 2} + \frac{1}{3} n h^2 y_n^{1/2} - \frac{8}{3} (n + 1) h^2 y_{n + 1}^{1/2} - y_{n + 1}.
+  \]
+  Let
+  \begin{align*}
+    A &= \frac{4}{3} (n + 2) h^2 \\
+    B &= \frac{1}{3} n h^2 y_n^{1/2} - \frac{8}{3} (n + 1) h^2 y_{n + 1}^{1/2} - y_{n + 1}.
+  \end{align*}
+  Then we can simplify to
+  \[
+    0 = y_{n+2}^2 + (2B - A^2)y_{n+2} + B^2.
+  \]
+  Writing 
+  \begin{align*}
+    C &= 2B - A^2 \\
+    D &= B^2
+  \end{align*}
+  we can simplify and solve for $y_{n+2}$. We get
+  \[
+    y_{n + 2} = \frac{-C + \sqrt{C^2 - 4D}}{2}.
+  \]
+  We use this to solve the problem numerically for $h = 0.1$, $0.05$, and $0.025$.
+  
+  Figure \ref{fig:prob1} shows the numerical solutions for the different $h$ values compared with the actual solution of $y(x) = (1+x^2)^2$. It is obvious from the images that the numerical solution is not converging to the actual solution.
+  
+  We can see why this is happening by analyzing the consistency of the method. The characteristic polynomial associated with the method is $\rho(\zeta) = \zeta^2 - \zeta$. Then $\rho'(1) = 1$. We know
+  \[
+    \phi_f(y_{n+2}, y_{n+1}, y_n, x_n; h) = \frac{1}{12}(4f(x_{n+2},y_{n+2}) + 8f(x_{n+1}, y_{n+1}) - f(x_n, y_n)).
+  \]
+  
+  Thus, we have that
+  \begin{align*}
+    \phi_f(y(x_n), y(x_n), y(x_n), x_n; 0)/\rho'(1)
+    &= \tfrac{1}{12}(4f(x_n,y(x_n)) + 8f(x_n, y(x_n)) - f(x_n, y(x_n))) \\
+    &= \tfrac{11}{12}f(x_n,y(x_n)).
+  \end{align*}
+  
+  Since $\phi_f(y(x_n), y(x_n), y(x_n), x_n; 0)/\rho'(1) \neq f(x_n,y(x_n))$, the method is not consistent.
 \end{solution}
