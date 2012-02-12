@@ -12,6 +12,17 @@
 \end{problem}
 
 \begin{solution}
+  We use the forward Euler method for this problem since it is explicit and therefore easier to compute. Writing $x$ for $y_1$ and $y$ for $y_2$, we get
+  \begin{align*}
+    x_n &= x_{n-1} + h\left(\alpha - x_{n-1} - \frac{4 x_{n-1} y_{n-1}}{1 + x_{n-1}^2}\right) \\
+    y_n &= y_{n-1} + h \beta x_{n-1} \left(1 - \frac{y_{n-1}}{1 + x_{n-1}^2}\right).
+  \end{align*}
+  We also compute the critical value for this problem when $\alpha$ is chosen to be $10$.
+  \begin{align*}
+    \beta_c 
+    &= \frac{3\cdot 10}{5} - \frac{25}{10} \\
+    &= 8.5.
+  \end{align*}
   \begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.3]{../plot/plot_4_1.png}
@@ -19,6 +30,7 @@
     \caption{$\beta = 2$: $y_1$ vs. $t$, $y_2$ vs. $y_1$}
     \label{fig:prob4_1}
   \end{figure}
+  Figure \ref{fig:prob4_1} shows what happens when $\beta$ is below the critical value. Here, the solutions approach a steady limit cycle as $t \to \infty$. We can see in the first graph that $y_1$ quickly becomes periodic, and from the phase plane, we see that the solutions are quickly attracted to a cycle.
   \begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.3]{../plot/plot_4_3.png}
@@ -26,6 +38,7 @@
     \caption{$\beta = 4$: $y_1$ vs. $t$, $y_2$ vs. $y_1$}
     \label{fig:prob4_2}
   \end{figure}
+  Figure \ref{fig:prob4_2} shows what happens when $\beta$ is above the critical value. In the phase plane, we see that the solution spirals inward to a steady point as $t \to \infty$. We can also see this behavior in the graph of $y_1$ vs. $t$. In this situation, $y_1$ is still periodic, but is clearly being dampened to approach a single value.
   \begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.3]{../plot/plot_4_5.png}
@@ -33,4 +46,5 @@
     \caption{$\beta = 3.5$: $y_1$ vs. $t$, $y_2$ vs. $y_1$}
     \label{fig:prob4_3}
   \end{figure}
+  Figure \ref{fig:prob4_3} shows what happens when $\beta = \beta_c$, the critical value. At this value, the steady point asymptotic solution loses stability and turns into a stable periodic orbit. Here, the solutions spiral inward, but extremely slowly.
 \end{solution}
