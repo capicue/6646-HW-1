@@ -23,7 +23,7 @@
 \end{problem}
 
 \begin{solution}
-  \begin{enumerate}[(1)]
+  \begin{enumerate}
     \item The general solution to the first order nonlinear Riccati equation
     \[
       y' = -5ty^2 + \frac{5}{t} - \frac{1}{t^2}
@@ -36,16 +36,37 @@
     \[
       y(t) = \frac{1}{t}.
     \]
-    \begin{tabular}{|l|l|l|l|l|}
-      \hline
-      h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
-      \hline
-      $0.1$   & $\num{9.09e-3}$ & $\num{5.21e-3}$ & $\num{6.03e-3}$ & $\num{6.61e-3}$ \\
-      $0.05$  & $\num{3.43e-3}$ & $\num{2.80e-3}$ & $\num{2.99e-3}$ & $\num{3.12e-3}$ \\
-      $0.025$ & $\num{1.60e-3}$ & $\num{1.45e-3}$ & $\num{1.51e-3}$ & $\num{1.54e-3}$ \\
-      $0.01$  & $\num{6.20e-4}$ & $\num{5.97e-4}$ & $\num{6.06e-4}$ & $\num{6.10e-4}$ \\
-      \hline
-    \end{tabular}
+    
+    Table \ref{tab:eq1} shows the maximum error for different methods with different values of $h$. The end points are not shown since they do not vary across methods or $h$ values.
+    
+    \begin{table}[!ht]
+      \label{tab:eq1}
+      \centering
+      \caption{Equation 1: Maximum Error for Varying $h$}
+      \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
+        \hline
+        $0.1$   & $\num{9.09e-3}$ & $\num{5.21e-3}$ & $\num{6.03e-3}$ & $\num{6.61e-3}$ \\
+        $0.05$  & $\num{3.43e-3}$ & $\num{2.80e-3}$ & $\num{2.99e-3}$ & $\num{3.12e-3}$ \\
+        $0.025$ & $\num{1.60e-3}$ & $\num{1.45e-3}$ & $\num{1.51e-3}$ & $\num{1.54e-3}$ \\
+        $0.01$  & $\num{6.20e-4}$ & $\num{5.97e-4}$ & $\num{6.06e-4}$ & $\num{6.10e-4}$ \\
+        \hline
+      \end{tabular}
+    \end{table}
+    
+    We know that the forward and backward Euler methods are consistent of order 1. The theta method is order 2 for $\theta = 1/2$ where it is the same as the trapezoidal method. Is is order 1 for all other values of $\theta$.
+    
+    All of the methods perform very well for this particular equation. One thing to note is the stability of the forward Euler method. If we choose $h = 0.2$, it is outside the region of absolute stability and the approximate solution oscillates. The backward Euler method has much better stability, so we do not see this behavior using this method. Figure \ref{fig:stability} compares both of these methods for $h = 0.2$.
+    
+    \begin{figure}[!ht]
+      \centering
+      \includegraphics[scale=0.5]{../plot/plot_6_1.png}
+      \includegraphics[scale=0.5]{../plot/plot_6_2.png}
+      \caption{Forward and Backward Euler Methods ($h = 0.2$)}
+      \label{fig:stability}
+    \end{figure}
+    
     \item The general solution to the first order linear equation
     \[
       y' = y \sin(2t + 3)
@@ -58,25 +79,77 @@
     \[
       y(t) = e^{\frac12 \cos(3)-\frac12 \cos(2t + 3)}.
     \]
-    \begin{tabular}{|l|l|l|l|l|}
-      \hline
-      h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
-      \hline
-      $0.1$   & $\num{4.57e-1}$ & $\num{8.71e-1}$ & $\num{1.59e-3}$ & $\num{2.65e-1}$ \\
-      $0.05$  & $\num{2.65e-1}$ & $\num{3.65e-1}$ & $\num{3.96e-4}$ & $\num{1.43e-1}$ \\
-      $0.025$ & $\num{1.43e-1}$ & $\num{1.68e-1}$ & $\num{9.90e-5}$ & $\num{7.42e-2}$ \\
-      $0.01$  & $\num{5.99e-2}$ & $\num{6.38e-2}$ & $\num{1.58e-5}$ & $\num{3.04e-2}$ \\
-      \hline
-    \end{tabular}
-    \begin{tabular}{|l|l|l|l|l|}
-      \hline
-      h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
-      \hline
-      $0.1$   & $0.51$ & $1.84$ & $0.97$ & $0.70$ \\
-      $0.05$  & $0.70$ & $1.33$ & $0.97$ & $0.82$ \\
-      $0.025$ & $0.82$ & $1.13$ & $0.97$ & $0.89$ \\
-      $0.01$  & $0.91$ & $1.03$ & $0.97$ & $0.93$ \\
-      \hline
-    \end{tabular}
+    
+    The actual solution is oscillatory, and therefore most of the observations made in the previous problem also apply here. We get a better feel for the consistency of the different methods from this equation. Table \ref{tab:eq2_error} shows the maximum error for each method as we vary the step size. It is clear that all of the method have order 1 consistency except for the theta method with $\theta = 1/2$ which decays like $h^2$.
+    
+    \begin{table}[!ht]
+      \label{tab:eq2_error}
+      \centering
+      \caption{Equation 2: Maximum Error for Varying $h$}
+      \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
+        \hline
+        $0.1$   & $\num{4.57e-1}$ & $\num{8.71e-1}$ & $\num{1.59e-3}$ & $\num{2.65e-1}$ \\
+        $0.05$  & $\num{2.65e-1}$ & $\num{3.65e-1}$ & $\num{3.96e-4}$ & $\num{1.43e-1}$ \\
+        $0.025$ & $\num{1.43e-1}$ & $\num{1.68e-1}$ & $\num{9.90e-5}$ & $\num{7.42e-2}$ \\
+        $0.01$  & $\num{5.99e-2}$ & $\num{6.38e-2}$ & $\num{1.58e-5}$ & $\num{3.04e-2}$ \\
+        \hline
+      \end{tabular}
+    \end{table}
+    
+    The values at the end point ($t = 25$) are given in table \ref{tab:eq2_values}. The actual solution is $y(25) = 0.96478$. We see again from this table that the trapezoidal method gives the best results. 
+    
+    \begin{table}[!ht]
+      \label{tab:eq2_values}
+      \centering
+      \caption{Equation 2: Value at $t = 25$}
+      \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        h & F. Euler & B. Euler & Theta ($\theta = 0.5$) & Theta ($\theta =0.25$) \\
+        \hline
+        $0.1$   & $0.51$ & $1.84$ & $0.97$ & $0.70$ \\
+        $0.05$  & $0.70$ & $1.33$ & $0.97$ & $0.82$ \\
+        $0.025$ & $0.82$ & $1.13$ & $0.97$ & $0.89$ \\
+        $0.01$  & $0.91$ & $1.03$ & $0.97$ & $0.93$ \\
+        \hline
+      \end{tabular}
+    \end{table}
+    
+    We can get a better feel for the different methods by looking at the graphs. Figures \ref{fig:eq2_fb} and \ref{fig:eq2_t} compare all four methods with a fixed step size of $h = 0.1$.
+    
+    \begin{figure}[!ht]
+      \centering
+      \includegraphics[scale=0.3]{../plot/plot_6_3.png}
+      \includegraphics[scale=0.3]{../plot/plot_6_4.png}
+      \caption{Forward and Backward Euler Methods ($h = 0.1$)}
+      \label{fig:eq2_fb}
+    \end{figure}
+    
+    \begin{figure}[!ht]
+      \centering
+      \includegraphics[scale=0.3]{../plot/plot_6_5.png}
+      \includegraphics[scale=0.3]{../plot/plot_6_6.png}
+      \caption{Theta Method for $\theta = 0.5, 0.25$ ($h = 0.1$)}
+      \label{fig:eq2_t}
+    \end{figure}
+    
+    \FloatBarrier
+    We know that the theta method corresponds to other methods for various values of $\theta$. 
+    
+    \begin{table}[!ht]
+      \centering
+      \begin{tabular}{|rl|}
+        \hline
+        $\theta$ & Method \\
+        \hline
+        $0$ & Forward Euler \\
+        $.5$ & Trapezoidal \\
+        $1$ & Backward Euler \\
+        \hline
+      \end{tabular}
+    \end{table}
+    
+    We can see from the figures that the forward Euler method accumulates negative error, the backward Euler method accumulates positive error, the trapezoidal method exactly cancels them out, and the $\theta = 0.5$ method is closer to the forward than the backward Euler method.
   \end{enumerate}
 \end{solution}
