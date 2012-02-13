@@ -87,15 +87,13 @@ plots: $(BINS) $(PLOT) $(PLOTDIR)
 	$(BINDIR)/prob5 -m -e 1000 10000   >> $(OUTDIR)/error5
 	$(BINDIR)/prob5 -m -e 1000 20000   >> $(OUTDIR)/error5
 	$(BINDIR)/prob5 -m -e 1000 100000  >> $(OUTDIR)/error5
-	# # Problem 6 plots
-	$(BINDIR)/prob6 -f 1 -m f -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_1  -f "1/x" --markersize=1
-	$(BINDIR)/prob6 -f 1 -m b -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_2  -f "1/x" --markersize=1
-	$(BINDIR)/prob6 -f 1 -m t -t 0.5 -s 0.05   | $(PLOT) -o $(PLOTDIR)/plot_6_3 -f "1/x" --markersize=1
-	$(BINDIR)/prob6 -f 1 -m t -t 0.25 -s 0.05  | $(PLOT) -o $(PLOTDIR)/plot_6_4 -f "1/x" --markersize=1
-	$(BINDIR)/prob6 -f 2 -m f -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_5 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
-	$(BINDIR)/prob6 -f 2 -m b -s 0.05          | $(PLOT) -o $(PLOTDIR)/plot_6_6 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
-	$(BINDIR)/prob6 -f 2 -m t -t 0.5 -s 0.05   | $(PLOT) -o $(PLOTDIR)/plot_6_7 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
-	$(BINDIR)/prob6 -f 2 -m t -t 0.25 -s 0.05  | $(PLOT) -o $(PLOTDIR)/plot_6_8 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
+	# Problem 6 plots
+	$(BINDIR)/prob6 -f 1 -m f -s 0.2          | $(PLOT) -o $(PLOTDIR)/plot_6_1  -f "1/x" --markersize=1
+	$(BINDIR)/prob6 -f 1 -m b -s 0.2          | $(PLOT) -o $(PLOTDIR)/plot_6_2  -f "1/x" --markersize=1
+	$(BINDIR)/prob6 -f 2 -m f -s 0.1          | $(PLOT) -o $(PLOTDIR)/plot_6_3 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
+	$(BINDIR)/prob6 -f 2 -m b -s 0.1          | $(PLOT) -o $(PLOTDIR)/plot_6_4 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.5 -s 0.1   | $(PLOT) -o $(PLOTDIR)/plot_6_5 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
+	$(BINDIR)/prob6 -f 2 -m t -t 0.25 -s 0.1  | $(PLOT) -o $(PLOTDIR)/plot_6_6 -f "e**(cos(3)/2-cos(2*x+3)/2)" --markersize=1
 	# Problem 6 error
 	mkdir -p $(OUTDIR)
 	$(BINDIR)/prob6 -e -f 1 -m f -s 0.1            > $(OUTDIR)/error6
