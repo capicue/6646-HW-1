@@ -1,6 +1,7 @@
 \documentclass[10pt,letterpaper]{amspset}
 \let\ifpdf\relax
-\usepackage{enumerate, hyperref, graphicx, siunitx}
+\usepackage{enumerate, hyperref, graphicx, siunitx, placeins}
+\usepackage[margin=1in]{geometry}
 
 \name{Stacey Touset}
 \class{MATH 6646}
@@ -8,10 +9,18 @@
 \duedate{02/10/2012}
 
 \begin{document}
+  
+  All of the code for this project is located here: \texttt{github.com/capicue/6646-HW-1}. Each problem is solved numerically in C and piped through a Python script that uses Sage (sagemath.org) to plot the results.
+  
   \input{problem1}
+    \FloatBarrier
   \input{problem2}
+    \FloatBarrier
   \input{problem3}
+    \FloatBarrier
   \input{problem4}
+    \FloatBarrier
   \input{problem5}
+    \FloatBarrier
   \input{problem6}
 \end{document}
